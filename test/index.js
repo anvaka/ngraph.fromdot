@@ -71,7 +71,6 @@ test('it can load subgraphs', function(t) {
   });
 
   test('nested', function(t) {
-    debugger;
     var graph = load('digraph G { {1 {2 3}} -> 4}');
     t.equals(graph.getNodesCount(), 4, 'four nodes');
     t.equals(graph.getLinksCount(), 3, 'three links');
@@ -87,6 +86,27 @@ test('it can load subgraphs', function(t) {
     t.ok(graph.hasLink(1, 4), '1 -> 4');
     t.ok(graph.hasLink(2, 4), '2 -> 3');
     t.ok(graph.hasLink(3, 4), '3 -> 4');
+    t.end();
+  });
+
+  test('nested both sides', function(t) {
+    var graph = load('digraph G { {1 {2 3}} -> {4 {5 6}}}');
+    t.equals(graph.getNodesCount(), 6, 'four nodes');
+    t.equals(graph.getLinksCount(), 9, 'nine links');
+    for (var i = 1; i < 7; ++i) {
+      t.equals(graph.getNode(i).id, i, 'Node ' + i + ' is there');
+    }
+    t.ok(graph.hasLink(1, 4), '1 -> 4');
+    t.ok(graph.hasLink(1, 5), '1 -> 5');
+    t.ok(graph.hasLink(1, 6), '1 -> 6');
+
+    t.ok(graph.hasLink(2, 4), '2 -> 4');
+    t.ok(graph.hasLink(2, 5), '2 -> 5');
+    t.ok(graph.hasLink(2, 6), '2 -> 6');
+
+    t.ok(graph.hasLink(3, 4), '3 -> 4');
+    t.ok(graph.hasLink(3, 5), '3 -> 5');
+    t.ok(graph.hasLink(3, 6), '3 -> 6');
     t.end();
   });
   t.end();
