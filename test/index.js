@@ -8,6 +8,17 @@ test('it can load graph', function(t) {
   t.end();
 });
 
+test('it loads graph with numeric labels', function(t) {
+  var graph = load('digraph G { a;b; a -> b }');
+  t.equals(graph.getNodesCount(), 2, 'two nodes');
+  t.equals(graph.getLinksCount(), 1, 'one link');
+  var firstNode = graph.getNode('a');
+  var secondNode = graph.getNode('b');
+  t.equals(firstNode.id, 'a', 'First node is here');
+  t.equals(secondNode.id, 'b', 'Second node is here');
+  t.end();
+});
+
 test('it can load graph', function(t) {
   var graph = load('digraph G { 1 -> 2}');
   t.equals(graph.getNodesCount(), 2, 'two nodes');

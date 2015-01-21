@@ -1,18 +1,31 @@
 module.exports = load;
+
 var parseDot = require('dotparser');
 
-function load(dotGraph, saveTo) {
+/**
+ * Loads graph from 'dot' string.
+ *
+ * @param {String} dotGraph a graph in `dot` format
+ * @param {ngraph.graph=} appendTo optional argument if you want to append parsed
+ * graph to an old graph.
+ *
+ * @return {ngraph.graph} Parsed graph
+ * 
+ * @see https://en.wikipedia.org/wiki/DOT_(graph_description_language)
+ * @see https://github.com/anvaka/ngraph.graph
+ */
+function load(dotGraph, appendTo) {
   var dotAST = parseDot(dotGraph);
-  if (dotAST.length > 1 && saveTo !== undefined) {
+  if (dotAST.length > 1 && appendTo !== undefined) {
     throw new Error('Dot file contains multiple graphs. Cannot use `saveTo` in this case');
   }
 
-  if (!saveTo) {
-    saveTo = require('ngraph.graph')();
+  if (!appendTo) {
+    appendTo = require('ngraph.graph')();
   }
   // by default load will only load first graph:
 
-  return loadOne(saveTo, dotAST[0]);
+  return loadOne(appendTo, dotAST[0]);
 }
 
 function loadOne(graph, ast) {
@@ -74,7 +87,7 @@ function concat(head, tail) {
 
 function addNode(graph, nodeAST) {
   if (nodeAST.type === 'node_id') {
-    graph.addNode(nodeAST.id); // todo attributes/data
+    graph.addNode(nodeAST.id); // TODO attributes/data
     return [nodeAST.id];
   } else if (nodeAST.type === 'subgraph') {
     return loadSubgraph(graph, nodeAST);
@@ -84,7 +97,7 @@ function addNode(graph, nodeAST) {
 function addLink(graph, from, to) {
   for (var i = 0; i < from.length; ++i) {
     for (var j = 0; j < to.length; ++j) {
-      graph.addLink(from[i], to[j]); // todo attributes/data;
+      graph.addLink(from[i], to[j]); // TODO attributes/data;
     }
   }
 }
