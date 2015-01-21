@@ -1,4 +1,4 @@
-# ngraph.fromdot
+# ngraph.fromdot [![Build Status](https://travis-ci.org/anvaka/ngraph.fromdot.svg)](https://travis-ci.org/anvaka/ngraph.fromdot)
 
 Loads dot file format into ngraph
 
