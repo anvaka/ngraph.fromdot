@@ -1,7 +1,7 @@
 {
   "name": "ngraph.fromdot",
   "version": "0.1.0",
-  "description": "Loads dot file format into ngraph",
+  "description": "Load dot files into ngraph.graph",
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js"

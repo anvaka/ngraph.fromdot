@@ -1,6 +1,6 @@
 # ngraph.fromdot [![Build Status](https://travis-ci.org/anvaka/ngraph.fromdot.svg)](https://travis-ci.org/anvaka/ngraph.fromdot)
 
-Loads [dot](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) files into [`ngraph.graph`](https://github.com/anvaka/ngraph)
+Load [dot](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) files into [`ngraph.graph`](https://github.com/anvaka/ngraph)
 
 # usage
 
