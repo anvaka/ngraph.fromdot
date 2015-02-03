@@ -1,6 +1,6 @@
 {
   "name": "ngraph.fromdot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Load dot files into ngraph.graph",
   "main": "index.js",
   "scripts": {
