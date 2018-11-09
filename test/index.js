@@ -30,6 +30,18 @@ test('it can load graph', function(t) {
   t.end();
 });
 
+test('it can parse node attributes', function(t) {
+  var graph = load(`digraph {
+      25 -> 26;
+      25[fontname="Palatino-Bold" shape=box size=0];
+  }`);
+  var data25 = graph.getNode(25).data;
+  t.equals(data25.fontname, 'Palatino-Bold', 'font is here');
+  t.equals(data25.shape, 'box', 'shape is here');
+  t.equals(data25.size, 0, 'size is here');
+  t.end();
+});
+
 test('it can load subgraphs', function(t) {
   test('left hand side', function(t) {
     var graph = load('digraph G { {1 2} -> 3}');
@@ -120,5 +132,16 @@ test('it can load subgraphs', function(t) {
     t.ok(graph.hasLink(3, 6), '3 -> 6');
     t.end();
   });
+
+  t.end();
+});
+
+test('it can parse edge attributes', function(t) {
+  var graph = load(`digraph {
+      25 -> 26 [style=dotted width=2];
+  }`);
+  var linkData = graph.getLink(25, 26).data;
+  t.equals(linkData.style, 'dotted', 'style is here');
+  t.equals(linkData.width, 2, 'width is here');
   t.end();
 });

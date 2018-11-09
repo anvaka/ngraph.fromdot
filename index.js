@@ -63,11 +63,12 @@ function processEdgeStatement(graph, edgeAST) {
   var prevNode = addNode(graph, first);
   concat(addedNodes, prevNode);
 
+  var attributes = parseAttributesAsData(edgeAST.attr_list);
   for (var i = 1; i < edges.length; ++i) {
     var nextNode = addNode(graph, edges[i]);
     concat(addedNodes, nextNode);
 
-    addLink(graph, prevNode, nextNode);
+    addLink(graph, prevNode, nextNode, attributes);
     prevNode = nextNode;
   }
 
@@ -75,7 +76,7 @@ function processEdgeStatement(graph, edgeAST) {
 }
 
 function processNodeStatement(graph, nodeStatement) {
-  return addNode(graph, nodeStatement.node_id);
+  return addNode(graph, nodeStatement.node_id, nodeStatement.attr_list);
 }
 
 function concat(head, tail) {
@@ -85,20 +86,36 @@ function concat(head, tail) {
   return head;
 }
 
-function addNode(graph, nodeAST) {
+function addNode(graph, nodeAST, attributesList) {
   if (nodeAST.type === 'node_id') {
-    graph.addNode(nodeAST.id); // TODO attributes/data
+    var data = parseAttributesAsData(attributesList);
+    if (data) {
+      graph.addNode(nodeAST.id, data);
+    } else {
+      graph.addNode(nodeAST.id);
+    }
     return [nodeAST.id];
   } else if (nodeAST.type === 'subgraph') {
     return loadSubgraph(graph, nodeAST);
   }
 }
 
-function addLink(graph, from, to) {
+function addLink(graph, from, to, data) {
   for (var i = 0; i < from.length; ++i) {
     for (var j = 0; j < to.length; ++j) {
-      graph.addLink(from[i], to[j]); // TODO attributes/data;
+      graph.addLink(from[i], to[j], data);
     }
   }
+}
+
+function parseAttributesAsData(attributesList) {
+  if (!attributesList || !attributesList.length) return;
+  var data = Object.create(null);
+  for (var i = 0; i < attributesList.length; ++i) {
+    var attr = attributesList[i];
+    if (attr.type !== 'attr' || attr.id === undefined) continue;
+    data[attr.id] = attr.eq;
+  }
+  return data;
 }
 
