@@ -42,6 +42,15 @@ test('it can parse node attributes', function(t) {
   t.end();
 });
 
+test('it can parse nodes that start with number', function(t) {
+  var graph = load(`digraph {
+      anvaka -> 5am;
+  }`);
+  t.ok(graph.getNode('anvaka'), 'anvaka was here');
+  t.ok(graph.getNode('5am'), '5am was here');
+  t.end();
+});
+
 test('it can load subgraphs', function(t) {
   test('left hand side', function(t) {
     var graph = load('digraph G { {1 2} -> 3}');
