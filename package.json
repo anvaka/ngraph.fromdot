@@ -20,10 +20,10 @@
     "url": "https://github.com/anvaka/ngraph.fromdot"
   },
   "devDependencies": {
-    "tap": "^12.0.0"
+    "tap": "^13.1.8"
   },
   "dependencies": {
     "dotparser": "^0.4.0",
-    "ngraph.graph": "0.0.14"
+    "ngraph.graph": "18.0.0"
   }
 }
