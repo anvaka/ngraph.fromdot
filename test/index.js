@@ -42,6 +42,18 @@ test('it can parse node attributes', function(t) {
   t.end();
 });
 
+test('it keeps node attributes', function(t) {
+  var graph = load(`digraph {
+      25 [fontname="Palatino-Bold" shape=box size=0];
+      25 -> 26;
+  }`);
+  var data25 = graph.getNode(25).data;
+  t.equals(data25.fontname, 'Palatino-Bold', 'font is here');
+  t.equals(data25.shape, 'box', 'shape is here');
+  t.equals(data25.size, 0, 'size is here');
+  t.end();
+});
+
 test('it can parse nodes that start with number', function(t) {
   var graph = load(`digraph {
       anvaka -> 5am;

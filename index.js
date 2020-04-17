@@ -88,7 +88,10 @@ function concat(head, tail) {
 
 function addNode(graph, nodeAST, attributesList) {
   if (nodeAST.type === 'node_id') {
-    var data = parseAttributesAsData(attributesList);
+    var data = mergeNodeDataIfNeeded(
+      parseAttributesAsData(attributesList),
+      graph.getNode(nodeAST.id)
+    );
     if (data) {
       graph.addNode(nodeAST.id, data);
     } else {
@@ -119,3 +122,7 @@ function parseAttributesAsData(attributesList) {
   return data;
 }
 
+function mergeNodeDataIfNeeded(newData, oldNode) {
+  if (!oldNode || !oldNode.data) return newData;
+  return Object.assign(oldNode.data, newData);
+}
