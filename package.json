@@ -4,7 +4,8 @@
   "description": "Load dot files into ngraph.graph",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/*.js",
+    "build": "browserify index.js -s fromDot -o dist/ngraph.fromDot.js && uglifyjs dist/ngraph.fromDot.js -o dist/ngraph.fromDot.min.js"
   },
   "keywords": [
     "ngraph",
@@ -20,7 +21,8 @@
     "url": "https://github.com/anvaka/ngraph.fromdot"
   },
   "devDependencies": {
-    "tap": "^14.10.5"
+    "tap": "^14.10.8",
+    "uglify-js": "^3.10.0"
   },
   "dependencies": {
     "dotparser": "^1.0.0",
