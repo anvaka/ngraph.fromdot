@@ -1,4 +1,4 @@
-# ngraph.fromdot [![Build Status](https://travis-ci.org/anvaka/ngraph.fromdot.svg?branch=master)](https://travis-ci.org/anvaka/ngraph.fromdot)
+# ngraph.fromdot [![Build Status](https://github.com/anvaka/ngraph.fromdot/actions/workflows/tests.yaml/badge.svg)](https://github.com/anvaka/ngraph.fromdot/actions/workflows/tests.yaml)
 
 Load [dot](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) files into [`ngraph.graph`](https://github.com/anvaka/ngraph)
 
