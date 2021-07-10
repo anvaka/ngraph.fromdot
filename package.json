@@ -21,8 +21,9 @@
     "url": "https://github.com/anvaka/ngraph.fromdot"
   },
   "devDependencies": {
+    "browserify": "^17.0.0",
     "tap": "^15.0.9",
-    "uglify-js": "^3.13.8"
+    "uglify-js": "^3.13.10"
   },
   "dependencies": {
     "dotparser": "^1.0.0",
