@@ -166,3 +166,12 @@ test('it can parse edge attributes', function(t) {
   t.equal(linkData.width, 2, 'width is here');
   t.end();
 });
+
+
+test ('it can parse negative values', function(t) {
+  var graph = load(`digraph {
+      hello ["count"=-633];
+  }`);
+  t.equal(graph.getNode('hello').data.count, -633, 'value parsed');
+  t.end();
+})
