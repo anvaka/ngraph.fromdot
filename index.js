@@ -23,8 +23,8 @@ function load(dotGraph, appendTo) {
   if (!appendTo) {
     appendTo = require('ngraph.graph')();
   }
-  // by default load will only load first graph:
 
+  // by default load will only load the first graph:
   return loadOne(appendTo, dotAST[0]);
 }
 
@@ -56,7 +56,7 @@ function loadSubgraph(graph, ast) {
 
 function processEdgeStatement(graph, edgeAST) {
   var edges = edgeAST.edge_list;
-  if (edges.length === 0) return; // wat?
+  if (edges.length === 0) return; // wat? should I throw?
 
   var first = edges[0];
   var addedNodes = [];
@@ -126,3 +126,4 @@ function mergeNodeDataIfNeeded(newData, oldNode) {
   if (!oldNode || !oldNode.data) return newData;
   return Object.assign(oldNode.data, newData);
 }
+
