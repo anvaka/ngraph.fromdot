@@ -174,4 +174,12 @@ test ('it can parse negative values', function(t) {
   }`);
   t.equal(graph.getNode('hello').data.count, -633, 'value parsed');
   t.end();
-})
+});
+
+test ('it can parse attributes with arrays', function(t) {
+  var graph = load(`digraph {
+      hello ["position"="[1,2,3]"];
+  }`);
+  t.same(graph.getNode('hello').data.position, [1, 2, 3], 'value parsed');
+  t.end();
+});

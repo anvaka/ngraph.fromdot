@@ -117,6 +117,15 @@ function parseAttributesAsData(attributesList) {
   for (var i = 0; i < attributesList.length; ++i) {
     var attr = attributesList[i];
     if (attr.type !== 'attr' || attr.id === undefined) continue;
+    var maybeArray = attr.eq[0] === '[' && attr.eq[attr.eq.length - 1] === ']';
+    if (maybeArray) {
+      try {
+        var eq = JSON.parse(attr.eq);
+        attr.eq = eq;;
+      } catch (e) {
+        // ignore errors
+      }
+    }
     data[attr.id] = attr.eq;
   }
   return data;
